@@ -11,6 +11,7 @@
       --bg-0: #0E1215; --bg-1: #12181B; --card: #1A2125; --card-hi: #202A2F;
       --line: #26313A; --mint: #10B981; --mint-soft: #20B2AA; --white: #FFFFFF;
       --muted: #9CA3AF; --muted-2: #6B7280;
+      --coral: #EF4444; --coral-soft: #FF6B6B;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-1); color: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -24,8 +25,25 @@
     .logo-text { height: 30px; width: auto; object-fit: contain; }
     .nav-links { display: flex; align-items: center; gap: 22px; color: var(--muted); font-size: 13px; font-weight: 600; }
     .nav-links a:hover, .nav-links a.active { color: var(--mint); }
-    .nav-action { border: 1px solid var(--line); border-radius: 9px; padding: 8px 12px; color: var(--muted); font-size: 13px; }
-    .nav-action:hover { border-color: var(--mint); color: var(--mint); }
+    .nav-logout {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, .1);
+      border: 1px solid rgba(239, 68, 68, .3);
+      color: var(--coral-soft);
+      font-size: 13px;
+      font-weight: 700;
+      transition: all .2s;
+    }
+    .nav-logout:hover {
+      background: var(--coral);
+      color: var(--white);
+      border-color: var(--coral);
+      box-shadow: 0 4px 14px rgba(239, 68, 68, .35);
+    }
     @media (max-width: 900px) { .nav-links { gap: 12px; font-size: 12px; } }
     @media (max-width: 760px) { .nav-links { display: none; } }
     .page-header { padding: 54px 0 30px; background: radial-gradient(850px 300px at 50% 0%, rgba(16,185,129,.13), transparent 72%), linear-gradient(180deg,var(--bg-0),var(--bg-1)); border-bottom: 1px solid var(--line); }
@@ -92,7 +110,7 @@
         <a href="eticket.html" class="active">Tiket Saya</a>
         <a href="mitra.html">Jadi Mitra</a>
       </div>
-      <a href="index.html" class="nav-action">Beranda</a>
+      <a href="index.html" class="nav-logout">Logout ➔</a>
     </div>
   </nav>
   <header class="page-header">
