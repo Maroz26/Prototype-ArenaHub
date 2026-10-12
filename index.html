@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ArenaHub — Ekosistem Olahraga Terintegrasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0E1215;
+    --bg-1:#12181B;
+    --bg-2:#181A1B;
+    --card:#1A2125;
+    --card-hi:#202A2F;
+    --line:#26313A;
+    --mint:#10B981;
+    --mint-soft:#20B2AA;
+    --coral:#EF4444;
+    --coral-soft:#FF6B6B;
+    --white:#FFFFFF;
+    --muted:#9CA3AF;
+    --muted-2:#6B7280;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--bg-1);
+    color:var(--white);
+    line-height:1.55;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ===== NAVBAR ===== */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,24,27,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:80px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    font-weight:800;
+    font-size:22px;
+    letter-spacing:-.02em;
+    color:var(--white);
+    text-decoration:none;
+  }
+
+
+  .logo-icon{
+    height: 68px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(16,185,129,.25));
+  }
+
+  .logo-text{
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transform: translateY(6px);   /* ← TAMBAH BARIS INI */
+  }
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--muted);font-weight:500}
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta{
+    background:var(--mint);color:#0E1215;
+    padding:10px 20px;border-radius:9px;
+    font-weight:700;font-size:13.5px;
+    transition:.2s;
+  }
+  .nav-cta:hover{background:var(--mint-soft);transform:translateY(-1px)}
+  @media(max-width:820px){.nav-links{display:none}}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:90px 0 100px;
+    overflow:hidden;
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(16,185,129,.14), transparent 60%),
+      radial-gradient(700px 400px at -10% 100%, rgba(239,68,68,.08), transparent 60%),
+      var(--bg-1);
+  }
+  /* subtle blob shapes */
+  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none}
+  .blob-1{width:420px;height:420px;background:#0f3d33;top:-120px;right:-100px}
+  .blob-2{width:360px;height:360px;background:#2a1a1a;bottom:-160px;left:-120px}
+
+  .hero-grid{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;
+  }
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(16,185,129,.1);
+    border:1px solid rgba(16,185,129,.3);
+    color:var(--mint);
+    font-size:12.5px;font-weight:600;letter-spacing:.02em;
+    margin-bottom:22px;
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+  h1{
+    font-size:clamp(34px,5vw,58px);
+    font-weight:900;line-height:1.06;letter-spacing:-.03em;
+    margin-bottom:22px;
+  }
+  h1 .accent{
+    background:linear-gradient(135deg,var(--mint),var(--mint-soft));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    font-size:16.5px;color:var(--muted);max-width:540px;margin-bottom:34px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:10px;font-weight:700;font-size:14.5px;
+    cursor:pointer;border:none;transition:.2s;font-family:inherit;
+  }
+  .btn-primary{background:var(--mint);color:#0E1215}
+  .btn-primary:hover{background:var(--mint-soft);transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,.3)}
+  .btn-ghost{background:transparent;color:var(--white);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--mint);color:var(--mint)}
+
+  .hero-stats{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap}
+  .stat b{display:block;font-size:26px;font-weight:900;letter-spacing:-.02em}
+  .stat span{font-size:12.5px;color:var(--muted-2);font-weight:500}
+  .stat b.mint{color:var(--mint)}
+  .stat b.coral{color:var(--coral-soft)}
+
+  /* Hero visual card */
+  .hero-visual{position:relative}
+  .glass-card{
+    background:linear-gradient(160deg,var(--card),var(--bg-2));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.7);
+  }
+  .gc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .gc-title{font-size:13px;font-weight:700;color:var(--white)}
+  .gc-sub{font-size:11px;color:var(--muted-2)}
+  .gc-pill{
+    font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:999px;
+    background:rgba(16,185,129,.15);color:var(--mint);border:1px solid rgba(16,185,129,.3);
+  }
+  .slot-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 14px;border-radius:10px;background:var(--card-hi);
+    margin-bottom:8px;border:1px solid transparent;transition:.2s;
+  }
+  .slot-row.active{border-color:var(--mint);background:rgba(16,185,129,.08)}
+  .slot-row.booked{opacity:.5}
+  .slot-info{display:flex;align-items:center;gap:12px}
+  .slot-icon{
+    width:34px;height:34px;border-radius:9px;background:rgba(16,185,129,.12);
+    display:grid;place-items:center;color:var(--mint);font-size:16px;
+  }
+  .slot-row.booked .slot-icon{background:rgba(239,68,68,.12);color:var(--coral)}
+  .slot-name{font-size:13px;font-weight:600}
+  .slot-time{font-size:11px;color:var(--muted-2)}
+  .slot-price{font-size:13px;font-weight:700;color:var(--mint)}
+  .slot-row.booked .slot-price{color:var(--coral)}
+  .gc-footer{
+    margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);
+  }
+  .pulse{
+    position:absolute;top:-10px;right:-10px;
+    width:80px;height:80px;border-radius:50%;
+    background:radial-gradient(circle,rgba(16,185,129,.35),transparent 70%);
+    animation:pulse 3s infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.3);opacity:.2}}
+
+  section{padding:88px 0;position:relative}
+  .section-head{max-width:680px;margin-bottom:56px}
+  .eyebrow{
+    font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--mint);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:24px;height:2px;background:var(--mint);border-radius:2px}
+  .eyebrow.coral{color:var(--coral-soft)}
+  .eyebrow.coral::before{background:var(--coral-soft)}
+  h2{
+    font-size:clamp(26px,3.5vw,40px);
+    font-weight:900;letter-spacing:-.025em;line-height:1.12;margin-bottom:16px;
+  }
+  .section-head p{color:var(--muted);font-size:15.5px}
+
+  .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media(max-width:960px){.problem-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.problem-grid{grid-template-columns:1fr}}
+  .problem-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 20px;transition:.25s;position:relative;overflow:hidden;
+  }
+  .problem-card::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+    background:var(--coral);transform:scaleX(0);transform-origin:left;transition:.3s;
+  }
+  .problem-card:hover::before{transform:scaleX(1)}
+  .problem-card:hover{border-color:#3a2a2a;transform:translateY(-3px);background:var(--card-hi)}
+  .pc-icon{
+    width:44px;height:44px;border-radius:11px;
+    background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
+    display:grid;place-items:center;font-size:20px;margin-bottom:16px;color:var(--coral-soft);
+  }
+  .problem-card h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .problem-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+  .pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:960px){.pillar-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.pillar-grid{grid-template-columns:1fr}}
+  .pillar{
+    background:linear-gradient(165deg,var(--card),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 22px;transition:.3s;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .pillar::after{
+    content:"";position:absolute;top:-40px;right:-40px;width:120px;height:120px;
+    background:radial-gradient(circle,rgba(16,185,129,.18),transparent 70%);
+    border-radius:50%;opacity:0;transition:.4s;
+  }
+  .pillar:hover{border-color:rgba(16,185,129,.5);transform:translateY(-4px)}
+  .pillar:hover::after{opacity:1}
+  .pillar-num{
+    font-size:11px;font-weight:800;color:var(--mint);letter-spacing:.1em;
+    margin-bottom:14px;opacity:.7;
+  }
+  .pillar-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(32,178,170,.08));
+    border:1px solid rgba(16,185,129,.3);
+    display:grid;place-items:center;font-size:22px;color:var(--mint);
+    margin-bottom:18px;
+  }
+  .pillar h3{font-size:16.5px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+  .pillar p{font-size:13.5px;color:var(--muted);line-height:1.65;flex-grow:1}
+  .pillar-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+  .tag{
+    font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:6px;
+    background:rgba(16,185,129,.1);color:var(--mint);border:1px solid rgba(16,185,129,.2);
+  }
+  .tag.coral{background:rgba(239,68,68,.1);color:var(--coral-soft);border-color:rgba(239,68,68,.2)}
+
+  .seg-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.seg-grid{grid-template-columns:1fr}}
+  .seg-card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:34px 30px;position:relative;overflow:hidden;
+  }
+  .seg-card.b2c{border-top:3px solid var(--mint)}
+  .seg-card.b2b{border-top:3px solid var(--coral)}
+  .seg-label{
+    display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.1em;
+    padding:5px 12px;border-radius:6px;margin-bottom:18px;
+  }
+  .seg-card.b2c .seg-label{background:rgba(16,185,129,.12);color:var(--mint)}
+  .seg-card.b2b .seg-label{background:rgba(239,68,68,.12);color:var(--coral-soft)}
+  .seg-card h3{font-size:20px;font-weight:800;margin-bottom:8px}
+  .seg-card .seg-desc{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+  .seg-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .seg-list li{display:flex;gap:11px;font-size:13.5px;color:#D1D5DB;align-items:flex-start}
+  .check{
+    width:19px;height:19px;border-radius:50%;flex-shrink:0;margin-top:1px;
+    display:grid;place-items:center;font-size:11px;font-weight:900;
+  }
+  .b2c .check{background:rgba(16,185,129,.15);color:var(--mint)}
+  .b2b .check{background:rgba(239,68,68,.15);color:var(--coral-soft)}
+
+  .revenue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.revenue-grid{grid-template-columns:1fr}}
+  .rev-card{
+    background:linear-gradient(160deg,var(--card),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 24px;transition:.25s;
+  }
+  .rev-card:hover{border-color:rgba(16,185,129,.4)}
+  .rev-icon{
+    width:44px;height:44px;border-radius:11px;background:rgba(16,185,129,.1);
+    display:grid;place-items:center;font-size:20px;color:var(--mint);margin-bottom:16px;
+  }
+  .rev-card h4{font-size:15px;font-weight:700;margin-bottom:8px}
+  .rev-card .rev-amount{font-size:20px;font-weight:900;color:var(--mint);letter-spacing:-.02em;margin-bottom:10px}
+  .rev-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+  .network{
+    background:
+      radial-gradient(700px 350px at 50% 0%, rgba(16,185,129,.12), transparent 70%),
+      linear-gradient(180deg,var(--bg-0),var(--bg-1));
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .network-inner{text-align:center;max-width:780px;margin:0 auto}
+  .network-inner h2{margin-bottom:20px}
+  .network-inner p{color:var(--muted);font-size:16px;margin-bottom:36px}
+  .loop{
+    display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+    margin:0 auto 40px;max-width:820px;
+  }
+  .loop-step{
+    flex:1;min-width:150px;padding:20px 14px;position:relative;
+  }
+  .loop-step:not(:last-child)::after{
+    content:"→";position:absolute;right:-6px;top:50%;transform:translateY(-50%);
+    color:var(--mint);font-size:18px;font-weight:700;
+  }
+  @media(max-width:700px){.loop-step::after{display:none}}
+  .loop-icon{
+    width:46px;height:46px;border-radius:50%;margin:0 auto 12px;
+    background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+    display:grid;place-items:center;color:var(--mint);font-size:19px;
+  }
+  .loop-step b{display:block;font-size:13px;font-weight:700;margin-bottom:4px}
+  .loop-step span{font-size:11.5px;color:var(--muted-2)}
+
+  footer{
+    background:var(--bg-0);border-top:1px solid var(--line);
+    padding:25px 0 34px;
+  }
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-links{display:flex;gap:26px;font-size:13px;color:var(--muted)}
+  .foot-links a:hover{color:var(--mint)}
+  .foot-copy{font-size:12px;color:var(--muted-2)}
+
+
+  /* ===== DAFTAR CABANG OLAHRAGA ===== */
+.sports-row{
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sports-label{
+  font-size: 12px;
+  color: var(--muted-2);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.sports-list{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sport-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #D1D5DB;
+  transition: all .2s;
+  cursor: default;
+}
+
+.sport-svg{
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.sport-chip:hover{
+  border-color: rgba(255,255,255,.15);
+  background: rgba(255,255,255,.04);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.sport-chip:hover .sport-svg{
+  transform: scale(1.15);
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <img src="images/Logo_ArenaHub_1_0.png" alt="ArenaHub" class="logo-icon">
+      <img src="images/Logo_ArenaHub_1_1.png" alt="ArenaHub" class="logo-text">
+    </a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#value">Value</a>
+      <a href="#pasar">Our Founders</a>
+
+    </div>
+    <a href="#cta" class="nav-cta">Mulai Sekarang</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="container hero-grid">
+    <div>
+      <span class="badge"><span class="dot"></span>SPORT PLATFORM</span>
+      <h1>Satu Platform untuk<br/><span class="accent">Booking, Komunitas,</span><br/>& Turnamen Olahraga.</h1>
+      <p class="lead">ArenaHub mempertemukan pemain, komunitas, pengelola GOR, dan penyelenggara turnamen dalam satu ekosistem digital</p>
+      <div class="hero-actions">
+        <a href="login.html" class="btn btn-primary">Booking Lapangan →</a>
+        <button class="btn btn-ghost">Daftarkan Arena Anda</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b class="mint">5+</b><span>Jenis Cabang Olahraga</span></div>
+        <div class="stat"><b class="mint">24/7 </b><span> Booking Kapan Saja</span></div>
+        <div class="stat"><b class="coral">0%</b><span>Risiko Bentrok Booking</span></div>
+      </div>
+
+      <div class="sports-row">
+        <div class="sports-list">
+          <span class="sport-chip"><span class="sport-ico">⚽</span>Futsal</span>
+          <span class="sport-chip"><span class="sport-ico">🏀</span>Basket</span>
+          <span class="sport-chip"><span class="sport-ico">🎾</span>Padel</span>
+          <span class="sport-chip"><span class="sport-ico">🏸</span>Badminton</span>
+          <span class="sport-chip"><span class="sport-ico">🥅</span>Mini Soccer</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-visual">
+      <div class="glass-card">
+        <div class="pulse"></div>
+        <div class="gc-header">
+          <div>
+            <div class="gc-title">Emerald Padel Club • Jakarta Selatan</div>
+            <div class="gc-sub">Jumat, 3 Okt 2026 · Real-time</div>
+          </div>
+          <span class="gc-pill">● Tersedia</span>
+        </div>
+
+        <div class="slot-row booked">
+          <div class="slot-info"><div class="slot-icon">✕</div><div><div class="slot-name">16:00 – 17:00</div><div class="slot-time">Sudah dibooking</div></div></div>
+          <div class="slot-price">—</div>
+        </div>
+        <div class="slot-row active">
+          <div class="slot-info"><div class="slot-icon">⚽</div><div><div class="slot-name">17:00 – 18:00</div><div class="slot-time">Tersedia · Konfirmasi instan</div></div></div>
+          <div class="slot-price">Rp180rb</div>
+        </div>
+        <div class="slot-row">
+          <div class="slot-info"><div class="slot-icon">⚽</div><div><div class="slot-name">18:00 – 19:00</div><div class="slot-time">Tersedia</div></div></div>
+          <div class="slot-price">Rp200rb</div>
+        </div>
+        <div class="slot-row">
+          <div class="slot-info"><div class="slot-icon">⚽</div><div><div class="slot-name">19:00 – 20:00</div><div class="slot-time">Tersedia</div></div></div>
+          <div class="slot-price">Rp200rb</div>
+        </div>
+
+        <div class="gc-footer">
+          <span>E-Tiket otomatis dikirim setelah bayar</span>
+          <span style="color:var(--mint);font-weight:700">Bayar →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MASALAH -->
+<section id="problem">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow coral">Problem Statement</div>
+      <h2>Olahraga jalan, tapi sistemnya masih manual.</h2>
+      <p>Empat pihak berbeda punya masalah yang saling berhubungan — dan belum ada solusi yang menyatukan semuanya.</p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-icon">🎯</div>
+        <h3>Pemain</h3>
+        <p>Harus telepon atau datang langsung ke GOR hanya untuk cek ketersediaan jadwal lapangan. Tidak transparan dan buang waktu.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">👥</div>
+        <h3>Komunitas</h3>
+        <p>Kesulitan mengatur jadwal latihan rutin, mengelola struktur pengurus, dan merekrut anggota baru secara terbuka.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon">🏟️</div>
+        <h3>Pengelola Arena</h3>
+        <p>Pencatatan jadwal masih manual — rawan <em>double booking</em> dan pembukuan keuangan belum terstruktur.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FITUR / 4 PILAR -->
+<section id="fitur" style="background:var(--bg-0);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">4 Pilar Utama</div>
+      <h2>Empat pilar, satu ekosistem.</h2>
+      <p>Setiap pilar saling menguatkan: booking memicu komunitas, komunitas memicu turnamen, turnamen memicu booking ulang.</p>
+    </div>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-num">PILAR 01</div>
+        <div class="pillar-icon">📅</div>
+        <h3>Smart Booking System</h3>
+        <p>Pencarian & reservasi lapangan real-time dengan konfirmasi otomatis dan E-Tiket digital.</p>
+        <div class="pillar-tags">
+          <span class="tag">Futsal</span><span class="tag">Basket</span>
+          <span class="tag">Padel</span><span class="tag">Badminton</span>
+          <span class="tag">Mini Soccer</span> <span class="tag">dll</span>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">PILAR 02</div>
+        <div class="pillar-icon">🤝</div>
+        <h3>Community Hub</h3>
+        <p>Wadah pendaftaran klub lokal, jadwal latihan internal dan struktur organisasi</p>
+        <div class="pillar-tags">
+          <span class="tag">Klub</span><span class="tag">Jadwal Latihan</span>
+          <span class="tag">Pengurus</span>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">PILAR 03</div>
+        <div class="pillar-icon">🏆</div>
+        <h3>Make Tournament</h3>
+        <p>Platform terpusat untuk pendaftaran tim, info turnamen antar-klub, dan penjadwalan pertandingan.</p>
+        <div class="pillar-tags">
+          <span class="tag coral">Turnamen</span><span class="tag coral">Bracket</span>
+          <span class="tag coral">Ticketing</span>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">PILAR 04</div>
+        <div class="pillar-icon">🏟️</div>
+        <h3>Arena Partner</h3>
+        <p>Kelola lapangan, pantau okupansi, dan terima pembayaran otomatis — dari satu dashboard.</p>
+        <div class="pillar-tags">
+          <span class="tag coral">Anti Double-Booking</span><span class="tag coral">Okupansi</span>
+          <span class="tag coral">Pembukuan</span>
+        </div>
+      </div>
+
+
+</section>
+
+<!-- Value -->
+<section id="value">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Our Dear Customers</div>
+      <h2>Value yang kami tawarkan.</h2>
+      <p>ArenaHub melayani pemain sekaligus pengelola.</p>
+    </div>
+
+    <div class="seg-grid">
+      <div class="seg-card b2c">
+        <span class="seg-label">· PEMAIN, KOMUNITAS, PANITIA</span>
+        <h3>Kemudahan di ujung jari.</h3>
+        <p class="seg-desc">Untuk siapa pun yang ingin olahraga tanpa ribet.</p>
+        <ul class="seg-list">
+          <li><span class="check">✓</span> Kepastian dan kemudahan jadwal booking secara instan</li>
+          <li><span class="check">✓</span> Platform terpusat untuk komunitas olahraga</li>
+          <li><span class="check">✓</span> Info & pendaftaran turnamen dalam satu tempat</li>
+          <li><span class="check">✓</span> E-Tiket digital, tidak perlu konfirmasi manual</li>
+        </ul>
+      </div>
+
+      <div class="seg-card b2b">
+        <span class="seg-label">· PENGELOLA / MITRA ARENA</span>
+        <h3>Kelola arena dengan sistem digital canggih.</h3>
+        <p class="seg-desc">Untuk pengelola yang ingin naik kelas dari sistem tradisional ke modern.</p>
+        <ul class="seg-list">
+          <li><span class="check">✓</span> Manajemen anti double-booking</li>
+          <li><span class="check">✓</span> Pendapatan tercatat rapi, tanpa buku tulis.</li>
+          <li><span class="check">✓</span> Eksposur lebih luas untuk menjangkau komunitas & pemain baru</li>
+          <li><span class="check">✓</span> Terima booking bahkan saat kasir tutup (24 jam).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="network" id="cta">
+  <div class="container network-inner">
+    <div class="eyebrow" style="justify-content:center">Competitive Moat</div>
+    <h2>Bukan sekadar aplikasi sewa lapangan —<br/>ini <span style="color:var(--mint)">ekosistem gaya hidup olahraga</span>.</h2>
+    <p> Main tiap minggu, gabung komunitas, ikut turnamen — semuanya di satu app!!</p>
+
+    <div class="loop">
+      <div class="loop-step">
+        <div class="loop-icon">📅</div>
+        <b>Booking</b><span>Pemain sewa lapangan</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">🤝</div>
+        <b>Komunitas</b><span>Gabung & latihan rutin</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">🏆</div>
+        <b>Turnamen</b><span>Ikut & adakan event</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">🔁</div>
+        <b>Repeat</b><span>Booking ulang otomatis</span>
+      </div>
+    </div>
+
+    <div class="hero-actions" style="justify-content:center">
+      <a href="login.html" class="btn btn-primary">Mulai Booking Sekarang</a>
+      <a href="mitra.html" class="btn btn-ghost">Jadi Mitra GOR</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container foot-inner">
+    <div class="logo">
+      <img src="images/Logo_ArenaHub_1_0.png" alt="ArenaHub" class="logo-icon" style="height:96px">
+      <img src="images/Logo_ArenaHub_1_1.png" alt="ArenaHub" class="logo-text" style="height:50px;transform:translateY(3px)">
+    </div>
+    <div class="foot-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#value">Customer kami</a>
+      <a href="#bisnis">Kemitraan</a>
+      <a href="#cta">Kontak</a>
+    </div>
+    <div class="foot-copy">© 2026 ArenaHub · Sport Platform Indonesia</div>
+  </div>
+</footer>
+
+</body>
+</html>
