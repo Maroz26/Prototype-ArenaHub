@@ -403,6 +403,90 @@
   transform: scale(1.15);
 }
 
+
+/*FOUNDERS */
+.founder-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+@media(max-width:820px){
+  .founder-grid{grid-template-columns:1fr;gap:20px}
+}
+
+.founder-card{
+  background:linear-gradient(165deg,var(--card),var(--bg-2));
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px 24px;
+  text-align:center;
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.founder-card::before{
+  content:"";
+  position:absolute;
+  top:-60px;right:-60px;
+  width:140px;height:140px;
+  background:radial-gradient(circle,rgba(16,185,129,.15),transparent 70%);
+  border-radius:50%;
+  opacity:0;
+  transition:.4s;
+}
+
+.founder-card:hover{
+  border-color:rgba(16,185,129,.5);
+  transform:translateY(-4px);
+}
+.founder-card:hover::before{opacity:1}
+
+.founder-photo{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  margin:0 auto 20px;
+  overflow:hidden;
+  border:3px solid rgba(16,185,129,.35);
+  background:var(--card-hi);
+  box-shadow:0 0 30px rgba(16,185,129,.15);
+  position:relative;
+  z-index:1;
+}
+
+.founder-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.founder-name{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:6px;
+  letter-spacing:-.01em;
+  position:relative;
+  z-index:1;
+}
+
+.founder-nim{
+  font-size:13px;
+  color:var(--mint);
+  font-weight:600;
+  margin-bottom:12px;
+  position:relative;
+  z-index:1;
+}
+
+.founder-role{
+  font-size:12.5px;
+  color:var(--muted-2);
+  position:relative;
+  z-index:1;
+}
+
 </style>
 </head>
 <body>
@@ -418,7 +502,7 @@
       <a href="#problem">Problem</a>
       <a href="#fitur">Fitur</a>
       <a href="#value">Value</a>
-      <a href="#pasar">Our Founders</a>
+      <a href="#founders">Our Founders</a>
 
     </div>
     <a href="#cta" class="nav-cta">Mulai Sekarang</a>
@@ -614,6 +698,52 @@
           <li><span class="check">✓</span> Terima booking bahkan saat kasir tutup (24 jam).</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOUNDERS -->
+<section id="founders" style="background:var(--bg-0);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Our Founders</div>
+      <h2>Orang di balik ArenaHub.</h2>
+      <p>Tiga mahasiswa Informatika Universitas Diponegoro yang membangun ArenaHub dari ide menjadi nilai nyata.</p>
+    </div>
+
+    <div class="founder-grid">
+
+      <!-- FOUNDER 1 — aku -->
+      <div class="founder-card">
+        <div class="founder-photo">
+          <img src="images/Ammar Rozan Rusyaidan.jpeg" alt="Founder 1">
+        </div>
+        <h3 class="founder-name">Ammar Rozan Rusyaidan</h3>
+        <p class="founder-nim">NIM: 24060124140147</p>
+        <p class="founder-role">Founder, CEO & CTO</p>
+      </div>
+
+      <!-- FOUNDER 2 — Mahasiswa 2 -->
+      <div class="founder-card">
+        <div class="founder-photo">
+          <img src="images/Unknown_Founder.jpg" alt="Founder 2">
+        </div>
+        <h3 class="founder-name">Nama Mahasiswa 2</h3>
+        <p class="founder-nim">NIM: -</p>
+        <p class="founder-role">Co-Founder</p>
+      </div>
+
+      <!-- FOUNDER 3 — Mahasiswa 3 -->
+      <div class="founder-card">
+        <div class="founder-photo">
+          <img src="images/Unknown_Founder.jpg" alt="Founder 3">
+        </div>
+        <h3 class="founder-name">Nama Mahasiswa 3</h3>
+        <p class="founder-nim">NIM: -</p>
+        <p class="founder-role">Co-Founder</p>
+      </div>
+
     </div>
   </div>
 </section>
