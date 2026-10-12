@@ -1,0 +1,96 @@
+
+<section id="bisnis" style="background:var(--bg-0);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Revenue Streams</div>
+      <h2>Tiga jalur monetisasi.</h2>
+      <p>Pendapatan berlapis dari sisi transaksi, langganan, dan komisi turnamen.</p>
+    </div>
+
+    <div class="revenue-grid">
+      <div class="rev-card">
+        <div class="rev-icon">💳</div>
+        <h4>Platform Fee</h4>
+        <div class="rev-amount">Rp2.000 – Rp5.000</div>
+        <p>Biaya layanan per transaksi booking pengguna. Volume kecil, tapi frekuensi tinggi dan berulang.</p>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-icon">📈</div>
+        <h4>B2B SaaS Subscription</h4>
+        <div class="rev-amount">Mingguan / Bulanan</div>
+        <p>Biaya langganan dari pengelola GOR untuk pemanfaatan B2B Operator Dashboard. Pendapatan berulang.</p>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-icon">🎟️</div>
+        <h4>Tournament Ticketing Fee</h4>
+        <div class="rev-amount">Komisi / Pendaftaran</div>
+        <p>Komisi dari setiap pendaftaran tim atau tiket turnamen yang ditransaksikan lewat Make Tournament.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+      <a href="#bisnis">Model Bisnis</a>
+
+
+<div class="eyebrow">Solusi · 4 Pilar Utama</div>x
+
+
+
+      <div class="pillar">
+        <div class="pillar-num">PILAR 04</div>
+        <div class="pillar-icon">📊</div>
+        <h3>B2B Operator Dashboard</h3>
+        <p>Manajemen jadwal anti double-booking, analisis okupansi lapangan, dan laporan keuangan otomatis.</p>
+        <div class="pillar-tags">
+          <span class="tag">Okupansi</span><span class="tag">Pembukuan</span>
+          <span class="tag">Anti-Overlap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+          <li><span class="check">✓</span> Analisis tingkat okupansi lapangan</li>
+
+                    <li><span class="check">✓</span> Laporan keuangan & pembukuan otomatis</li>
+
+                        <p>Kehadiran Fitur Komunitas & Turnamen mendorong pengguna membuka aplikasi secara rutin, menciptakan transaksi booking berulang (recurring usage) bagi GOR mitra.</p>
+
+
+
+
+
+  .logo-mark{
+    width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(135deg,var(--mint),var(--mint-soft));
+    display:grid;place-items:center;color:#0E1215;font-weight:900;font-size:16px;
+    box-shadow:0 0 20px rgba(16,185,129,.35);
+  }
+  .logo-mark::before{content:"A"}
+
+
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo"><div class="logo-mark"></div> ArenaHub</div>
+    <div class="nav-links">
+      <a href="#masalah">Masalah</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#pasar">Pasar</a>
+
+    </div>
+    <a href="#cta" class="nav-cta">Mulai Sekarang</a>
+  </div>
+</nav>
